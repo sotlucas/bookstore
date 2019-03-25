@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #[em LocalLibrary], a very basic Express website developed to practice.
+  
+  h1 Statistics
+  
+  if error
+    p Error getting dynamic content.
+  else
+    p The library has the following record counts:
+    
+    ul
+      li
+        a(href='/catalog/books')
+          button.btn.btn-primary #[strong Books] 
+            span.badge.badge-pill.badge-primary !{data.book_count}
+      li 
+        a(href='/catalog/bookinstances')
+          button.btn.btn-danger #[strong Copies] 
+            span.badge.badge-pill.badge-primary !{data.book_instance_count}
+      li
+        a(href='/catalog/bookinstances')
+          button.btn.btn-success #[strong Copies available] 
+            span.badge.badge-pill.badge-primary !{data.book_instance_available_count}
+      li
+        a(href='/catalog/authors')
+          button.btn.btn-info #[strong Authors] 
+            span.badge.badge-pill.badge-primary !{data.author_count}
+      li
+        a(href='/catalog/genres')
+          button.btn.btn-warning #[strong Genres] 
+            span.badge.badge-pill.badge-primary !{data.genre_count}
+      
+      

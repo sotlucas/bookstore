@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  .row
+    .col-sm-6.col-md-4.col-md-offset.col-sm-offset-3
+      h1 Checkout
+      h4 Your Total: $#{total}
+      form#checkout-form(method='POST' action='/checkout')
+        .row
+          .col-xs-12
+            .form-group
+              label(for='name') Name
+              input#name.form-control(type='text' required)
+          .col-xs-12
+            .form-group
+              label(for='address') Address
+              input#address.form-control(type='text' required)
+          .col-xs-12
+            .form-group
+              label(for='card-name') Card Holder Name
+              input#card-name.form-control(type='text' required)
+          .col-xs-12
+            .form-group
+              label(for='card-number') Credit Card Number
+              input#card-number.form-control(type='text' required)
+          .col-xs-12
+            .row
+              .col-xs-6
+                .form-group
+                  label(for='card-expiry-month') Expiration Month
+                  input#card-expiry-month.form-control(type='text' required)
+              .col-xs-6
+                .form-group
+                  label(for='card-expiry-year') Expiration Year
+                  input#card-expiry-year.form-control(type='text' required)
+          .col-xs-12
+            .form-group
+              label(for='card-cvc') CVC
+              input#card-cvc.form-control(type='text' required)
+        button.btn.btn-success(type='submit') Buy now

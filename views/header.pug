@@ -1,0 +1,37 @@
+header
+  div.stuff
+    div.logo
+      a(href='/')
+        span.full
+          span Local
+          | books
+        span.short
+          span L
+          | b
+    
+    div.search
+      input(type="search" placeholder="Search")
+        
+    div.menu
+      i.fas.fa-fw.fa-bars
+        
+    nav
+      a(href='/') Home
+      a(href='/catalog/books') Books
+      a(href='/catalog/authors') Authors
+      a(href='/catalog/genres') Genres
+      a(href='/cart')
+        i.fas.fa-fw.fa-shopping-basket
+        if session.cart
+          span.badge #{session.cart.totalQty}
+      div.dropdown
+        a#dropdownMenuLink.btn-secondary.dropdown-toggle(role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Account
+        div.dropdown-menu(aria-labelledby='dropdownMenuButton')
+          if login
+            a.dropdown-item(href='/user/profile') Profile
+            .dropdown-divider
+            a.dropdown-item(href='/user/logout') Logout
+          else
+            a.dropdown-item(href='/user/signup') Sign up
+            a.dropdown-item(href='/user/signin') Sign in
+          

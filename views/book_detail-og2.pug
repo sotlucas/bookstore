@@ -1,0 +1,53 @@
+extends layout
+
+block content
+  div.container
+    img(src=book.img)
+    
+    div.info
+      span.title #{book.title}
+      a(href=book.author.url).author #{book.author.name}
+      div.rating
+        label 5
+          input(type="radio" name="rating" value="5" title="5 stars")
+        label 4
+          input(type="radio" name="rating" value="4" title="4 stars")
+        label 3
+          input(type="radio" name="rating" value="3" title="3 stars")
+        label 2
+          input(type="radio" name="rating" value="2" title="2 stars")
+        label 1
+          input(type="radio" name="rating" value="1" title="1 star")
+          
+    
+      p.summary #{book.summary}
+    
+      button.cart Add to cart
+  
+  div(style='margin-left: 20px; margin-top: 20px;')
+    h4 Copies
+    
+    each val in book_instances
+      hr
+      if val.status == 'Available'
+        p.text-success #{val.status}
+      else if val.status == 'Maintenance'
+        p.text-danger #{val.status}
+      else
+        p.text-warning #{val.status}
+      p #[strong Imprint:] #{val.imprint}
+      if val.status != 'Available'
+        p #[strong Due back:] #{val.due_back}
+      p #[strong Id:] 
+        a(href=val.url) #{val._id}
+        
+    else
+      p There are no copies of this book in the library.
+      
+  hr
+  p
+    a(href=book.url + '/delete')
+      button.btn.btn-danger Delete Book
+  p
+    a(href=book.url + '/update')
+      button.btn.btn-primary Update Book

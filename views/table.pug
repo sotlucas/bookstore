@@ -1,0 +1,26 @@
+div.table.table--4cols
+
+  a.cell.header Title 
+    i.fas.fa-fw.fa-sort
+  a.cell.header Author 
+    i.fas.fa-fw.fa-sort
+  a.cell.header Imprint 
+    i.fas.fa-fw.fa-sort
+  a.cell.header Status 
+    i.fas.fa-fw.fa-sort
+
+  each val in book_instances
+    a(href=val.url).cell.title #{val.book.title}
+    a(href=val.book.author.url).cell.author #{val.book.author.name}
+    a.cell.imprint #{val.imprint}
+    if val.status == 'Available'
+      a.cell.status.available #{val.status}
+    else if val.status == 'Maintenance'
+      a.cell.status.maintenance #{val.status}
+        span.due_back #{val.due_back_formatted}
+    else
+      a.cell.status.taken #{val.status}
+        span.due_back #{val.due_back_formatted}
+      
+  else
+    li There are no book copies in this library.

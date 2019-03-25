@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul
+    each genre in genre_list
+      li
+        a(href=genre.url)
+          span.badge.badge-pill.badge-primary !{genre_count}
+          |  #{genre.name}
+        
+    else
+      li We don't have any genre in this library. 

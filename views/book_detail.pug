@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  div.container
+    img(src=book.img)
+    
+    div.info
+      span.title #{book.title}
+      a(href=book.author.url).author #{book.author.name}
+      include rating
+      p.summary #{book.summary}
+      a(href='/add-to-cart/' + book._id)
+        button.cart Add to cart
+  
+  hr
+  h4 Copies
+  
+  include table
+
+      
+  hr
+  p
+    a(href=book.url + '/delete')
+      button.btn.btn-danger Delete Book
+  p
+    a(href=book.url + '/update')
+      button.btn.btn-warning 
+        i.fas.fa-edit 
+        |  Edit metadata

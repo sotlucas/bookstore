@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    
+    div.catalog
+      each book in book_list
+        div.book
+          a(href=book.url)
+            img(src=book.img)
+          ul.info
+            li
+              a.title(href=book.url) #{book.title}
+              a.author(href=book.author.url) #{book.author.name}
+            li.price $#{book.price}
+      else
+        li There are no books in the library.
