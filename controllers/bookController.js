@@ -37,13 +37,13 @@ exports.index = function(req, res) {
 
 // Display list of all books.
 exports.book_list = function(req, res, next) {
-
+  var successMsg = req.flash('success')[0];
   Book.find({}, 'title author img price')
     .populate('author')
     .exec(function (err, list_books) {
       if (err) { return next(err); }
       // Successful, so render
-      res.render('book_list', { title: 'Books List', book_list: list_books });
+      res.render('book_list', { title: 'Books List', book_list: list_books, successMsg: successMsg });
     });
 };
 

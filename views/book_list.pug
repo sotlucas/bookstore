@@ -2,6 +2,9 @@ extends layout
 
 block content
     
+    .row
+      .col-sm-6.col-ms-4.col-md-offset-4.col-sm-offset-3
+        #success.alert.alert-success(class=!successMsg ? 'd-none' : '') #{successMsg}
     div.catalog
       each book in book_list
         div.book

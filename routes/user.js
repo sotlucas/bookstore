@@ -22,13 +22,13 @@ router.use('/', notLoggedIn, function (req, res, next) {
 router.get('/signup', user_controller.signup_get);
 
 // POST signup
-router.post('/signup', user_controller.signup_post);
+router.post('/signup', user_controller.signup_post,redirectLogin);
 
 // GET signin
 router.get('/signin', user_controller.signin_get);
 
 // POST signin
-router.post('/signin', user_controller.signin_post);
+router.post('/signin', user_controller.signin_post, redirectLogin);
 
 
 module.exports = router;
@@ -45,4 +45,15 @@ function notLoggedIn(req, res, next) {
     return next();
   }
   res.redirect('/');
+}
+
+function redirectLogin(req, res, next) {
+  // Successful login attempt
+  if (req.session.oldUrl) {
+    var oldUrl = req.session.oldUrl;
+    req.session.oldUrl = null;
+    res.redirect(oldUrl);
+  } else {
+    res.redirect('/user/profile');
+  }
 }

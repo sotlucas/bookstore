@@ -23,7 +23,7 @@ header
       a(href='/cart')
         i.fas.fa-fw.fa-shopping-basket
         if session.cart
-          span.badge #{session.cart.totalQty}
+          span.badge.badge-pill.badge-secondary #{session.cart.totalQty}
       div.dropdown
         a#dropdownMenuLink.btn-secondary.dropdown-toggle(role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') Account
         div.dropdown-menu(aria-labelledby='dropdownMenuButton')

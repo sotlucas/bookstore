@@ -1,5 +1,9 @@
 var passport = require('passport');
 
+var Order = require('../models/order');
+var Cart = require('../models/cart');
+
+
 // GET signup
 exports.signup_get = function (req, res, next) {
   var messages = req.flash('error');
@@ -8,7 +12,6 @@ exports.signup_get = function (req, res, next) {
 
 // POST signup
 exports.signup_post = passport.authenticate('local.signup', {
-  successRedirect: '/user/profile',
   failureRedirect: '/user/signup',
   failureFlash: true
 });
@@ -21,7 +24,6 @@ var messages = req.flash('error');
 
 // POST signin
 exports.signin_post = passport.authenticate('local.signin', {
-  successRedirect: '/user/profile',
   failureRedirect: '/user/signin',
   failureFlash: true
 });
@@ -29,9 +31,18 @@ exports.signin_post = passport.authenticate('local.signin', {
 exports.logout_get = function (req, res, next) {
   req.logout();
   res.redirect('/');
-}
+};
 
 // GET user profile
 exports.profile_get = function (req, res, next) {
-  res.render('user/profile');
-}
+  Order.find({ user: req.user }, function (err, orders) {
+    if (err) { return res.write('Error!'); }
+    var cart;
+    orders.forEach(function (order) {
+      console.log(order.cart.item);
+      cart = new Cart(order.cart);
+      order.items = cart.generateArray();
+    });
+    res.render('user/profile', { orders: orders });
+  });
+};
