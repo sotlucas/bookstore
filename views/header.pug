@@ -10,8 +10,8 @@ header
           | b
     
     div.search
-      input(type="search" placeholder="Search")
-        
+      form(method='GET' action='/catalog/books')
+        input(type='search' name='search' placeholder='Search')
     div.menu
       i.fas.fa-fw.fa-bars
         

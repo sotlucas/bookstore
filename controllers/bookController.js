@@ -37,14 +37,29 @@ exports.index = function(req, res) {
 
 // Display list of all books.
 exports.book_list = function(req, res, next) {
-  var successMsg = req.flash('success')[0];
-  Book.find({}, 'title author img price')
-    .populate('author')
-    .exec(function (err, list_books) {
-      if (err) { return next(err); }
-      // Successful, so render
-      res.render('book_list', { title: 'Books List', book_list: list_books, successMsg: successMsg });
-    });
+  if (req.query.search) {
+    var regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    var successMsg = req.flash('success')[0];
+    Book.find({'title': regex}, 'title author img price')
+      .populate('author')
+      .exec(function (err, list_books) {
+        if (err) { return next(err); }
+        // Successful, so render
+        if (list_books.length < 1) {
+          var noMatch = 'Whoopsie! No books found, please try again.';
+        }
+        res.render('book_list', { title: 'Books List', book_list: list_books, successMsg: successMsg, noMatch: noMatch });
+      });
+  } else {
+    var successMsg = req.flash('success')[0];
+    Book.find({}, 'title author img price')
+      .populate('author')
+      .exec(function (err, list_books) {
+        if (err) { return next(err); }
+        // Successful, so render
+        res.render('book_list', { title: 'Books List', book_list: list_books, successMsg: successMsg, noMatch: undefined });
+      });
+  }
 };
 
 // Display detail page for a specific book.
@@ -340,3 +355,8 @@ exports.book_update_post = [
     }
   }
 ];
+
+// Extra functions
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};

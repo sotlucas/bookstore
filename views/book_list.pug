@@ -6,14 +6,18 @@ block content
       .col-sm-6.col-ms-4.col-md-offset-4.col-sm-offset-3
         #success.alert.alert-success(class=!successMsg ? 'd-none' : '') #{successMsg}
     div.catalog
-      each book in book_list
-        div.book
-          a(href=book.url)
-            img(src=book.img)
-          ul.info
-            li
-              a.title(href=book.url) #{book.title}
-              a.author(href=book.author.url) #{book.author.name}
-            li.price $#{book.price}
+      if noMatch
+        .col-md-12
+          h3 #{noMatch}
       else
-        li There are no books in the library.
+        each book in book_list
+          div.book
+            a(href=book.url)
+              img(src=book.img)
+            ul.info
+              li
+                a.title(href=book.url) #{book.title}
+                a.author(href=book.author.url) #{book.author.name}
+              li.price $#{book.price}
+        else
+          li There are no books in the library.
