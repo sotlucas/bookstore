@@ -149,8 +149,15 @@ header nav a:hover, .menu i:hover {
     padding: 20px 0;
     line-height: 0;
   }
-  header nav a:not(:first-child),
-  header nav a li{
+  header nav a,
+  header nav a li {
+    margin: 0;
+  }
+  header nav a:not(.dropdown-item) {
+    text-decoration: none;
+    color: #433D3D;
+    transition: all .3s;
+    line-height: normal;
     margin: 0;
   }
   header nav a:hover {

@@ -15,6 +15,8 @@ var userRouter = require('./routes/user');
 var catalogRouter = require('./routes/catalog');
 var cartRouter = require('./routes/cart');
 
+var compression = require('compression');
+
 var app = express();
 
 // Set up mongoose connection
@@ -48,6 +50,7 @@ app.use(session({
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(compression()); // compress all routes
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
   res.locals.login = req.isAuthenticated();
