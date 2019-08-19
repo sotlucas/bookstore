@@ -12,13 +12,7 @@ block content
       p.summary #{book.summary}
       a(href='/add-to-cart/' + book._id)
         button.cart-btn Add to cart
-  
-  hr
-  h4 Copies
-  
-  include table
 
-      
   hr
   p
     a(href=book.url + '/delete')
