@@ -2,7 +2,8 @@ extends layout
 
 block content
   div.container
-    img(src=book.img)
+    div.image
+      img(src=book.img)
     
     div.info
       span.title #{book.title}
@@ -10,7 +11,7 @@ block content
       include rating
       p.summary #{book.summary}
       a(href='/add-to-cart/' + book._id)
-        button.cart Add to cart
+        button.cart-btn Add to cart
   
   hr
   h4 Copies
